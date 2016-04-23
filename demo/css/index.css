@@ -1,0 +1,70 @@
+body{
+    font-size: 14px;
+    color:#5a5a5a;
+}
+/* 页面主体布局 */
+.row {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    position: relative;
+}
+.header{
+    height: 46px;
+    background: #416ab9;
+    position: relative;
+    text-align: center;
+    line-height: 46px;
+}
+.header h1{
+    margin: 0;
+    font-size: 18px;
+    font-weight: 100;
+    color: #fff;
+}
+.header .btn-back{
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    top: 0;
+    left: 0;
+    color: #fff;
+    display: inline-block;
+    font-size: 22px;
+    line-height: 46px;
+    text-align: center;
+}
+.content{
+    margin: 20px 0;
+    padding: 0 15px;
+}
+.content img{
+    width: 100%;
+    display: block;
+    margin: 20px 0;
+    border-radius: 6px;
+}
+.content h3{
+    font-size: 18px;
+    font-weight: 700;
+}
+.content p{
+    line-height: 22px;
+    text-indent:2em;
+    margin-bottom: 6px;
+}
+.tips{
+    text-align: right;
+    margin-bottom: 15px;
+}
+.tips strong{
+    font-style: normal;
+    display: inline-block;
+    margin-right: 12px;
+    color: #5f5f5f;
+}
+.tips em{
+    font-style: normal;
+    display: inline-block;
+    margin-right: 12px;
+}
