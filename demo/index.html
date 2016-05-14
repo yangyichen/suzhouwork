@@ -9,10 +9,11 @@
     <meta http-equiv="Cache-Control" content="no-siteapp">
     <meta name="screen-orientation" content="portrait">
     <meta name="x5-orientation" content="portrait">
-    <link rel="stylesheet" href="demo/css/base.css">
-    <link rel="stylesheet" href="demo/css/index.css">
-    <script src="demo/js/zoomerang.js"></script>
-    <script src="demo/js/touch.js"></script>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/zepto.min..js"></script>
+    <script src="js/zoomerang.js"></script>
+    <script src="js/touch.js"></script>
 </head>
 <body>
 <div class="row">
@@ -35,33 +36,60 @@
 <script>
     Zoomerang
             .config({
-
                 bgColor: '#000',
                 bgOpacity: .85,
+                onOpen:function () {
+                    $('body').css({'height': '100%' , 'overflow':'hidden'});
+                },
+                onClose:function () {
+                    $('body').css({'height': '100%' , 'overflow':'auto'});
+                }
             })
             .listen('.zoom')
     var target = document.getElementById("target");
     target.style.webkitTransition = 'all ease 0.05s';
 
-    touch.on('#target', 'touchstart', function(ev){
-        ev.preventDefault();
-    });
+//    touch.on('#target', 'touchstart', function(ev){
+//        ev.preventDefault();
+//    });
 
     var initialScale = 1;
     var currentScale;
-
+    var dx, dy;
     touch.on('#target', 'pinchend', function(ev){
-        currentScale = ev.scale - 1;
-        currentScale = initialScale + currentScale;
-        currentScale = currentScale > 2 ? 2 : currentScale;
-        currentScale = currentScale < 1 ? 1 : currentScale;
-        this.style.webkitTransform = 'scale(' + currentScale + ')';
-        log("当前缩放比例为:" + currentScale + ".");
+        if($('#target').parent().attr('class') !== 'innerImg') {
+            currentScale = ev.scale - 1;
+            currentScale = initialScale + currentScale;
+            currentScale = currentScale > 2 ? 2 : currentScale;
+            currentScale = currentScale < 1 ? 1 : currentScale;
+            this.style.webkitTransform = 'scale(' + currentScale + ')';
+        }
     });
 
     touch.on('#target', 'pinchend', function(ev){
-        initialScale = currentScale;
+        if($('#target').parent().attr('class') !== 'innerImg') {
+            initialScale = currentScale;
+        }
     });
+    touch.on('#target', 'drag', function(ev){
+        if($('#target').parent().attr('class') !== 'innerImg') {
+            dx = dx || 0;
+            dy = dy || 0;
+            var offx = dx + ev.x + "px";
+            var offy = dy + ev.y + "px";
+            this.style.webkitTransform = "translate3d(" + offx + "," + offy + ",0)";
+        }
+
+    });
+
+    touch.on('#target', 'dragend', function(ev){
+        if($('#target').parent().attr('class') !== 'innerImg') {
+            dx += ev.x;
+            dy += ev.y;
+        }
+
+    });
+
 </script>
 </body>
 </html>
